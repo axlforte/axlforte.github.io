@@ -1,0 +1,32 @@
+<html>
+ <head>
+  <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"> </script>  
+  <script>  
+   function start(){
+sjs.open();
+var menu_text = new sjs.Text("WIN",28,"blue");
+menu_text.centerH();
+
+var game_text = new sjs.Text("you didnt get hit!",28,"#ff0");
+game_text.centerH().offset(0, 30);
+
+var startBtn = new sjs.Button("retry", function(){
+window.location = "fish.html";
+});
+
+var info_text = new sjs.Text("now you dont have to do amy more eating!!",20,"black");
+
+score_txt.setText("Score: "+localStorage.getItem("score"));
+
+info_text.bottom().centerH();
+
+startBtn.center();
+
+} //end start
+  </script>  
+ </head>  
+ <body onload="start()">
+   <div id="target" style="margin:auto;background:#303030;"></div>
+ </body>
+</html>
+	
