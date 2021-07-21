@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Menu </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+function start(){
+sjs.open();
+
+var menu_text = new sjs.Text("MENU",28,"#eb3700");
+
+menu_text.centerH();
+
+var game_text = new sjs.Text("Use the Arrow Keys to Control the Paddles. Don't let the Ball get by you!",28,"#0056eb");
+
+game_text.centerH().offset(0, 30);
+
+var diff_text = new sjs.Text("the paddles slowly shrink as you hit the ball, make sure it doesnt slip by your tiny paddles!",28,"#0056eb");
+
+diff_text.centerH().offset(0, 290);
+
+var startBtn = new sjs.Button("Start", function(){
+window.location = "pong.html";
+});
+
+startBtn.center();
+
+var info_text = new sjs.Text("Created By Davis Williams",20,"black");
+
+info_text.bottom().centerH();
+
+} //end start
+</script>
+</head>
+<body onload="start()">
+<h1> Menu </h1>
+
+<div id="target" style="margin:auto;background:#066b00;"></div>
+</body>
+</html>
