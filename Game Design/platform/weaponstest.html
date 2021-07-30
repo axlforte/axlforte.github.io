@@ -1,0 +1,388 @@
+<html>
+<head>
+<script src="https://simplycodingcourses.com/files/simply.js"async></script>
+<script>
+
+var level = [];
+
+function start(){
+
+	var bgmsize = 512
+
+	sjs.open("target",512,480);
+	var background = new sjs.Image("Images/Tiles/tileset45.png");
+	background.setSize(bgmsize * 1, 480);
+
+	makebgm()
+
+	var player = new sjs.Image("Images/mogasp1.png");
+	player.type = "player";
+	player.setSize(64,64);
+	player.setGravity(1.5);
+	player.left();
+	player.friction = 0.1;
+	player.noBounds = true;
+	player.offset (100, 131)
+
+	var weapontype = 0
+
+	var dispweap = new sjs.Image("Images/plasmaicon.png")
+	dispweap.offset (20, 0)
+	dispweap.setSize(32,32);
+
+	sjs.scrollable(player,background);
+
+	var healthmax = 40
+	var healthhigh = 160
+	var invincible = 10
+	var health = new sjs.Text(".", 20,"yellow")
+	health.node.style.height = healthhigh+"px";
+	health.node.style.width = "20px"
+	health.node.style.backgroundColor = "yellow"
+	health.fixed = "true";
+
+	var r_images = ["Images/mogasp2.png", "Images/mogasp3.png", "Images/mogasp4.png", "Images/mogasp3.png"];
+	var l_images = ["Images/megasp2.png", "Images/megasp3.png", "Images/megasp4.png", "Images/megasp3.png"];
+
+	var r_facing = true;
+	var r_track = 0;
+	var l_track = 0;
+	var animtimer = 0;
+
+	var canJump = true;
+
+	sjs.keyDown(RIGHT_KEY, function(){
+	if(animtimer == 3){
+	r_track = r_track + 1
+	animtimer = 0
+	}
+	player.setImage(r_images[r_track]);
+	if(r_track ==3 & canJump == true){
+		r_track = 0;
+	}
+	if(r_track >= 11){
+	player.setImage("Images/mogasp6.png");
+	} else {
+	animtimer = animtimer + 1;
+	r_facing = true;
+	}
+	player.moveTo(player.x+8, player.y)
+	}); //end Right key
+
+	sjs.keyDown(LEFT_KEY, function(){
+	if(animtimer == 3){
+	l_track = l_track + 1
+	animtimer = 0
+	}
+	player.setImage(l_images[l_track]);
+	if(l_track == 3){
+	l_track = 0;
+	}
+	if(l_track >= 11){
+	player.setImage("Images/megasp6.png");
+	} else {
+	animtimer = animtimer + 1;
+	r_facing = false;
+	}
+	player.moveTo(player.x-8, player.y)
+	}); //end Left key
+
+	sjs.keyDown(UP_KEY, function(){
+	if(canJump == true){
+	canJump = false;
+	player.friction = 0.1
+	player.pushUp(23);
+	if(r_facing == true){
+	player.setImage("Images/mogasp6.png");
+	r_track = 11;
+	} else {
+	player.setImage("Images/megasp6.png");
+	l_track = 11;
+	}
+	} //end if statement
+	}); //end keyDown function
+
+	sjs.keyDown(SPACE_KEY, function(){
+	if(canShoot == true){
+		canShoot = false
+		if (weapontype == 0){
+			laser(r_facing, player)
+		} else if (weapontype == 1){
+			flamethrower(r_facing, player)
+			canShoot = true
+		} else if (weapontype == 2){
+			boomerang(r_facing, player)
+		}else if (weapontype == 3){
+			ball(r_facing, player)
+		}else if (weapontype == 4){
+			drillbeam(r_facing, player)
+		}
+	} //end canShoot if statement
+	}); //end keyDown function SPACE_KEY
+
+	window.addEventListener("keyup", function(e){
+	if(e.keyCode == RIGHT_KEY){
+	player.setImage("Images/mogasp1.png");
+	} else if (e.keyCode == LEFT_KEY){
+	player.setImage("Images/megasp1.png");
+	} else if (e.keyCode == SPACE_KEY){
+	if(r_facing == true){
+		player.setImage("Images/mogasp1.png");
+	} else {
+		player.setImage("Images/megasp1.png");
+	}
+	canShoot = true
+	} else if (e.keyCode == A_KEY){
+		if (weapontype < 4){
+			weapontype = weapontype+1
+		} else {
+			weapontype = 0
+		}
+		if (weapontype == 0){
+			dispweap.setImage("Images/plasmaicon.png");
+		} else if (weapontype == 1){
+			dispweap.setImage("Images/fireicon.png");
+		} else if (weapontype == 2){
+			dispweap.setImage("Images/boomericon.png");
+		} else if (weapontype == 3){
+			dispweap.setImage("Images/snekicon.png");
+		} else if (weapontype == 4){
+			dispweap.setImage("Images/drillicon.png");
+		}
+	} //end if statement
+	}); //end EventListener function
+
+
+	sjs.onHit("player","platform", function(x,y){
+	sjs.stoppedBy(x,y);
+	if(canJump == false && x.y < y.y-34){
+	canJump = true;
+	r_track = 0;
+	l_track = 0;
+	}
+	});
+
+	var canShoot = false;
+	
+	sjs.onHit("player","powerUp", function(x,y){
+	canShoot = true;
+	y.destroy();
+	});
+
+	var flagOn = true;
+
+	sjs.onHit("laser",["right_screen","left_screen","platform","score"], function(x,y){
+	x.destroy();
+	});
+} //end start
+function makebgm(){
+
+	var b = "b"
+	var c = "c"
+	var d = "d"
+	var e = "e"
+	var f = "f"
+	var g = "g"
+	var h = "h"
+	var i = "i"
+	var j = "j"
+	var k = "k"
+	var l = "l"
+	var m = "m"
+	var n = "n"
+	var o = "o"
+	var p = "p"
+	var q = "q"
+	var r = "r"
+	var s = "s"
+	var t = "t"
+	var u = "u"
+	var v = "v"
+	var w = "w"
+	var x = "x"
+
+	var mapArray=[
+	[6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,7,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+	[3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,]
+	];
+
+	var mapX = 0;
+	var mapY = 0;
+
+	for(var ik = 0;ik<mapArray.length;ik++){
+		for(var jk = 0;jk<mapArray[ik].length;jk++){
+			if(mapArray[ik][jk]==0){
+				var treetop = new sjs.Image("Images/Tiles/tileset45.png");
+				treetop.type="grass";
+				}
+			if(mapArray[ik][jk]==1){
+				var treetop = new sjs.Image("Images/Tiles/tileset36.png");
+				treetop.type="platform";
+				}
+			if(mapArray[ik][jk]==3){
+				var treetop = new sjs.Image("Images/Tiles/tileset37.png");
+				treetop.type="platform";
+				}
+			if(mapArray[ik][jk]==4){
+				var treetop = new sjs.Image("Images/Tiles/tileset38.png");
+				treetop.type="platform";
+			}
+			if(mapArray[ik][jk]==5){
+				var treetop = new sjs.Image("Images/Tiles/tileset42.png");
+				treetop.type="platform";
+			}
+			if(mapArray[ik][jk]==6){
+				var treetop = new sjs.Image("Images/Tiles/tileset40.png");
+				treetop.type="platform";
+			}
+			if(mapArray[ik][jk]==7){
+				var treetop = new sjs.Image("Images/Tiles/tileset39.png");
+				treetop.type="platform";
+			}
+			treetop.setSize(32,32);
+			treetop.moveTo(mapX, mapY);
+			mapX += 32;
+		}
+		mapX=0;
+		mapY+=32;
+	}
+} //end makebgm
+function laser(r_facing, player){
+	var laser = new sjs.Image("Images/laser.png");
+	laser.type = "laser";
+	laser.setSize(20,10);
+	laser.friction = 0;
+	laser.noBounds = true;
+	if(r_facing == true){
+	laser.moveTo(player.getX()+20,player.getY()+35);
+	laser.pushRight(15);
+	player.setImage("Images/mogasp7.png");
+	} else {
+	laser.moveTo(player.getX()-10,player.getY()+35);
+	laser.pushLeft(15);
+	player.setImage("Images/megasp7.png");
+	laser.setImage("Images/ylaser.png")
+	}
+} //end laser
+function flamethrower(r_facing, player){
+	var laser = new sjs.Image("Images/fore.png");
+	laser.type = "laser";
+	laser.setSize(40,40);
+	laser.friction = -0.1;
+	laser.noBounds = true;
+	canShoot = true
+	if(r_facing == true){
+	laser.moveTo(player.getX()+50,player.getY()+15);
+	laser.pushRight(12);
+	player.setImage("Images/mogasp7.png");
+	} else {
+	laser.moveTo(player.getX()-10,player.getY()+25);
+	laser.pushLeft(12);
+	player.setImage("Images/megasp7.png");
+	laser.setImage("Images/fire.png")
+	}
+	laser.pushUp(-1 + Math.random()*3);
+	setInterval(function(){
+	laser.destroy();
+	},250);
+} //end flamethrower
+function boomerang(r_facing, player){
+	var laser = new sjs.Image("Images/boomer.gif");
+	laser.type = "laser";
+	laser.setSize(20,20);
+	laser.friction = 0.1;
+	laser.noBounds = true;
+
+	if(r_facing == true){
+	laser.moveTo(player.getX()+20,player.getY()+35);
+	laser.pushRight(15);
+	player.setImage("Images/mogasp7.png");
+	} else {
+	laser.moveTo(player.getX()-10,player.getY()+35);
+	laser.pushLeft(15);
+	player.setImage("Images/megasp7.png");
+	}
+	setInterval(function(){
+	laser.friction = -0.1
+	if(r_facing == true){
+	laser.pushRight(-1);
+	} else {
+	laser.pushLeft(-1);
+	}
+	},1000);
+	setInterval(function(){
+	laser.destroy();
+	},5000);
+} //end boomerang
+function ball(r_facing, player){
+	var laser = new sjs.Image("Images/snak.png");
+	laser.type = "laser";
+	laser.setSize(32,16);
+	laser.friction = 0.2;
+	laser.setGravity(1.5);
+	laser.noBounds = true;
+	if(r_facing == true){
+	laser.moveTo(player.getX()+50,player.getY()+15);
+	laser.pushRight(1);
+	player.setImage("Images/mogasp7.png");
+	} else {
+	laser.moveTo(player.getX()-10,player.getY()+15);
+	laser.pushLeft(1);
+	player.setImage("Images/megasp7.png");
+	}
+	sjs.onHit("laser","platform", function(x,y){
+	sjs.stoppedBy(x,y);
+	if(r_facing == true){
+	laser.pushRight(3);
+	} else {
+	laser.pushLeft(3);
+	laser.setImage("Images/snek.png")
+	}
+	});
+	setInterval(function(){
+	laser.destroy();
+	},3000);
+} //end snek
+function drillbeam(r_facing, player){
+	var laser = new sjs.Image("Images/drillbeam.png");
+	laser.type = "laser";
+	laser.setSize(32,32);
+	laser.friction = -0.1;
+	laser.noBounds = true;
+	if(r_facing == true){
+	laser.moveTo(player.getX()+20,player.getY()+25);
+	laser.pushRight(5);
+	player.setImage("Images/mogasp7.png");
+	} else {
+	laser.moveTo(player.getX()-10,player.getY()+25);
+	laser.pushLeft(5);
+	player.setImage("Images/megasp7.png");
+	laser.setImage("Images/drillboom.png")
+	}
+	setInterval(function(){
+	laser.destroy();
+	},3000);
+} //end laser
+
+</script>
+</head>
+<body onload="start()">
+<h1> Platform Game </h1>
+
+
+<div id="target" style="margin:auto;background:#181810;"></div>
+</body>
+</html>

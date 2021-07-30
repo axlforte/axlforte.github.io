@@ -1,0 +1,38 @@
+<html>
+ <head>
+  <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"> </script>  
+  <script>  
+function start(){
+
+	sjs.open("target",512,480);
+	var menu_text = new sjs.Text("WIN",28,"blue");
+	menu_text.centerH();
+	
+	var bgm = new sjs.Image("Images/mmxending.png");
+	bgm.setSize(512,480);
+
+	var explosion = new sjs.Image("Images/explosion.gif")
+	explosion.setSize(96,192)
+	explosion.center().offset(-100, 100);
+
+	var game_text = new sjs.Text("you defeated elec man!",28,"#ff0");
+	game_text.centerH().offset(0, 30);
+
+	var startBtn = new sjs.Button("retry", function(){
+	window.location = "test.html";
+	});
+
+	score_txt.setText("Score: "+localStorage.getItem("score"));
+
+	info_text.bottom().centerH();
+
+	startBtn.center();
+
+} //end start
+  </script>  
+ </head>  
+ <body onload="start()">
+   <div id="target" style="margin:auto;background:#303030;"></div>
+ </body>
+</html>
+	

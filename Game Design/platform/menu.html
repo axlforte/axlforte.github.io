@@ -1,0 +1,33 @@
+<html>
+ <head>
+  <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"> </script>  
+  <script>  
+function start(){
+	sjs.open("target",512,480);
+
+	var background = new sjs.Image("Images/title.png")
+	background.setSize(512, 480)
+
+	var game_text = new sjs.Text("left and right make you move left and right, up arrow makes you jump, and spacebar makes you shoot.",28,"#ff0");
+	game_text.centerH().offset(0, 300);
+
+	var extra_text = new sjs.Text("look for ladders.", 28, "#ff0");
+	extra_text.centerH().offset(0, 452);
+
+	var startBtn = new sjs.Button("BEGIN", function(){
+	window.location = "test.html";
+	});
+
+	var info_text = new sjs.Text("Created By Davis Williams, megaman is made by capcom.",20,"black");
+
+	info_text.bottom().centerH();
+
+	startBtn.center();
+} //end start
+  </script>  
+ </head>  
+ <body onload="start()">
+   <div id="target" style="margin:auto;background:black;"></div>
+ </body>
+</html>
+	
