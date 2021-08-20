@@ -279,6 +279,8 @@ function laser(r_facing, player){
 } //end laser
 function flamethrower(r_facing, player){
 	var laser = new sjs.Image("Images/fore.png");
+	var flamecounter = 0
+	var flameangle = [0, -1, -2, -3, -2, -1, 0, 1, 2, 3, 2, 1];
 	laser.type = "laser";
 	laser.setSize(40,40);
 	laser.friction = -0.1;
@@ -294,9 +296,14 @@ function flamethrower(r_facing, player){
 	player.setImage("Images/megasp7.png");
 	laser.setImage("Images/fire.png")
 	}
-	laser.pushUp(-1 + Math.random()*3);
+	laser.pushUp(flameangle[flamecounter]);
 	setInterval(function(){
 	laser.destroy();
+	if (flamecounter < 11){
+		flamecounter = flamecounter+1	
+	} else {
+		flamecounter = 0
+	}
 	},250);
 } //end flamethrower
 function boomerang(r_facing, player){
