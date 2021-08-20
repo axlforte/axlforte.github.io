@@ -292,7 +292,7 @@ function flamethrower(r_facing, player){
 	player.setImage("Images/mogasp7.png");
 	} else {
 	laser.moveTo(player.getX()-10,player.getY()+25);
-	laser.pushLeft(12);
+	laser.pushLeft(3);
 	player.setImage("Images/megasp7.png");
 	laser.setImage("Images/fire.png")
 	}
@@ -304,7 +304,7 @@ function flamethrower(r_facing, player){
 	} else {
 		flamecounter = 0
 	}
-	},250);
+	},1000);
 } //end flamethrower
 function boomerang(r_facing, player){
 	var laser = new sjs.Image("Images/boomer.gif");
