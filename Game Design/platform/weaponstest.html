@@ -299,7 +299,7 @@ function flamethrower(r_facing, player){
 	laser.pushUp(flameangle[flamecounter]);
 	setInterval(function(){
 	laser.destroy();
-	if (flamecounter < 11){
+	if (flamecounter != 12){
 		flamecounter++	
 	} else {
 		flamecounter = 0
