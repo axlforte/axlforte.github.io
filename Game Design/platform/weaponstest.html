@@ -280,7 +280,7 @@ function laser(r_facing, player){
 function flamethrower(r_facing, player){
 	var laser = new sjs.Image("Images/fore.png");
 	var flamecounter = 0
-	var flameangle = [0, -1, -2, -3, -2, -1, 0, 1, 2, 3, 2, 1];
+	var flameangle = [[0], [-1], [-2], [-3], [-2], [-1], [0], [1], [2], [3], [2], [1]];
 	laser.type = "laser";
 	laser.setSize(40,40);
 	laser.friction = -0.1;
