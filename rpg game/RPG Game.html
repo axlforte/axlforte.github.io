@@ -1,0 +1,294 @@
+<html>
+<head>
+<script src="https://simplycodingcourses.com/files/simply.js"async></script>
+<script>
+
+function start(){
+
+	var levelnumber = localStorage.getItem("levelnumber")
+
+	sjs.open("target",576,384);
+
+	makebgm(levelnumber)
+
+	drawhealth(levelnumber)
+
+	controlplayer(levelnumber)
+
+	sjs.onHit("player","platform", function(x,y){
+	});
+} //end start
+
+function controlplayer(levelnumber){
+
+	var canmove = true
+	var playerfacing = 1
+
+	var player = new sjs.Image("Images/playr1.png");
+		player.type = "player";
+		player.setSize(32,32);
+		player.setGravity(0);
+		player.left();
+		player.friction = 0.1;
+		player.noBounds = true;
+		if (levelnumber == 0){
+			player.offset (32, 192)
+		} else if (levelnumber == 1){
+			player.offset (512, 192)
+		} else if (levelnumber == 1){
+			player.offset (512, 192)
+		} else {
+			levelnumber = 0
+			player.offset (32, 192)
+		}
+		
+
+		sjs.keyDown(RIGHT_KEY, function(){
+			player.setImage("Images/playr2.png");
+			if (canmove == true){
+			canmove = false
+			player.moveTo(player.x+32, player.y)
+			sjs.onHit("player","platform", function(x,y){
+				x.moveTo(x.x-32, x.y)
+			});
+			}
+		}); //end Right key
+
+		sjs.keyDown(LEFT_KEY, function(){
+			player.setImage("Images/playr3.png");
+			if (canmove == true){
+			canmove = false
+			player.moveTo(player.x-32, player.y)
+			sjs.onHit("player","platform", function(x,y){
+				x.moveTo(x.x+32, x.y)
+			});
+			}
+		}); //end Left key
+
+		sjs.keyDown(UP_KEY, function(){
+			player.setImage("Images/playr4.png");
+			if (canmove == true){
+			canmove = false
+			player.moveTo(player.x, player.y-32)
+			sjs.onHit("player","platform", function(x,y){
+				x.moveTo(x.x, x.y+32)
+			});
+			}
+		}); //end up key
+
+		sjs.keyDown(DOWN_KEY, function(){
+			player.setImage("Images/playr1.png");
+			if (canmove == true){
+			canmove = false
+			player.moveTo(player.x, player.y+32)
+			sjs.onHit("player","platform", function(x,y){
+				x.moveTo(x.x, x.y-32)
+			});
+			}
+		}); //end down key
+
+	window.addEventListener("keyup", function(e){
+		if(e.keyCode == RIGHT_KEY){
+			playerfacing = 1
+			canmove = true
+		} else if (e.keyCode == LEFT_KEY){
+			playerfacing = 2
+			canmove = true
+		} else if (e.keyCode == UP_KEY){
+			playerfacing = 0
+			canmove = true
+		} else if (e.keyCode == DOWN_KEY){
+			playerfacing = 3
+			canmove = true
+		} else if (e.keyCode == SPACE_KEY){
+			canmove = true
+		} //end if statement
+		sjs.onHit("player","tup", function(x,y){
+			levelnumber++
+			localStorage.setItem("levelnumber", levelnumber);
+			location.reload()
+		});
+
+		sjs.onHit("player","tleftback", function(x,y){
+			levelnumber--
+			localStorage.setItem("levelnumber", levelnumber);
+			location.reload()
+		});
+	}); //end EventListener function
+
+	var l_images = ["Images/playr1.png", "Images/playr2.png", "Images/playr3.png", "Images/playr4.png"];
+	var lmove = [0, 32, -32, 0];
+	var rmove = [-32, 0, 0, 32];
+	var lbounce = [0,-32, 32, 0];
+	var rbounce = [32, 0, 0, -32];
+
+	var dmax = 3
+	var dashkick = 0
+
+	sjs.keyDown(SPACE_KEY, function(){
+		dashkick = 5
+	}); //end Right key
+
+	if (dashkick > 0 && canmove == true){
+		player.setImage(l_images[playerfacing]);
+		canmove = false
+		player.moveTo(player.x+(lmove[playerfacing]), player.y+(rmove[playerfacing]))
+		sjs.onHit("player","platform", function(x,y){
+		x.moveTo(x.x+(lbounce[playerfacing]), x.y+(rbounce[playerfacing]))
+		});
+		dashkick = dashkick-1
+		if (dashkick < 2){
+			canmove = true
+		}
+
+	} 
+
+	sjs.keyDown(Q_KEY, function(){
+			localStorage.setItem("levelnumber", 0);
+			location.reload()
+	}); //end up key
+} // end controlplayer
+
+function drawhealth(levelnumber){
+
+	var healthspacing = 0
+	var hpmax = 5
+
+	for(var hprep = 0;hprep<levelnumber;hprep++){
+
+		var healthchunk = new sjs.Image("Images/healthchunk.png");
+		healthchunk.setSize(16, 12);
+		healthchunk.moveTo(0, healthspacing);
+		healthspacing += 13
+
+	}
+} // end drawhealth
+
+function makebgm(levelnumber){
+
+	var a = a 
+	var b = b 
+	var c = c
+
+	var levelArray1=[
+		[6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,7,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[b,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,5,],
+		[b,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,5,],
+		[7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,]
+	];
+	var levelArray2=[
+		[6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,7,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,8,8,8,0,0,0,0,0,0,3,],
+		[b,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,a,],
+		[b,0,0,0,0,0,0,0,8,0,8,0,0,0,0,0,0,a,],
+		[5,0,0,0,0,0,0,0,8,8,8,0,0,0,0,0,0,6,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,]
+	];
+	var levelArray3=[
+		[6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,7,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,8,8,8,0,0,0,0,0,0,3,],
+		[5,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,a,],
+		[5,0,0,0,0,0,0,0,8,0,8,0,0,0,0,0,0,a,],
+		[5,0,0,0,0,0,0,0,8,8,8,0,0,0,0,0,0,6,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,],
+		[3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,]
+	];
+
+	if (levelnumber == 0){
+		var mapArray = levelArray1
+	} else if(levelnumber == 1) {
+		var mapArray = levelArray2
+	} else if(levelnumber == 2) {
+		var mapArray = levelArray3
+	} else {
+		var mapArray = levelArray1
+	}
+
+	var mapX = 0;
+	var mapY = 0;
+
+	for(var ik = 0;ik<mapArray.length;ik++){
+		for(var jk = 0;jk<mapArray[ik].length;jk++){
+			if(mapArray[ik][jk]==0){
+				var treetop = new sjs.Image("Images/Tiles/tileset1.png");
+				treetop.type="grass";
+				}
+			if(mapArray[ik][jk]==1){
+				var treetop = new sjs.Image("Images/Tiles/tileset2.png");
+				treetop.type="platform";
+				}
+			if(mapArray[ik][jk]==3){
+				var treetop = new sjs.Image("Images/Tiles/tileset3.png");
+				treetop.type="platform";
+				}
+			if(mapArray[ik][jk]==4){
+				var treetop = new sjs.Image("Images/Tiles/tileset4.png");
+				treetop.type="platform";
+			}
+			if(mapArray[ik][jk]==5){
+				var treetop = new sjs.Image("Images/Tiles/tileset5.png");
+				treetop.type="platform";
+			}
+			if(mapArray[ik][jk]==6){
+				var treetop = new sjs.Image("Images/Tiles/tileset6.png");
+				treetop.type="platform";
+			}
+			if(mapArray[ik][jk]==7){
+				var treetop = new sjs.Image("Images/Tiles/tileset7.png");
+				treetop.type="platform";
+			}
+			if(mapArray[ik][jk]==8){
+				var treetop = new sjs.Image("Images/Tiles/tileset8.png");
+				treetop.type="platform";
+			}
+			if(mapArray[ik][jk]==9){
+				var treetop = new sjs.Image("Images/Tiles/tileset1.png");
+				treetop.type="tleft";
+			}
+			if(mapArray[ik][jk]==a){
+				var treetop = new sjs.Image("Images/Tiles/tileset1.png");
+				treetop.type="tleftback";
+			}
+			if(mapArray[ik][jk]==b){
+				var treetop = new sjs.Image("Images/Tiles/tileset1.png");
+				treetop.type="tupback";
+			}
+			if(mapArray[ik][jk]==c){
+				var treetop = new sjs.Image("Images/Tiles/tileset1.png");
+				treetop.type="tup";
+			}
+			treetop.setSize(32,32);
+			treetop.moveTo(mapX, mapY);
+			mapX += 32;
+		}
+		mapX=0;
+		mapY+=32;
+	}
+} //end makebgm
+
+</script>
+</head>
+<body onload="start()">
+<h1> RPG prototype </h1>
+<div id="target" style="margin:auto;background:#181810;"></div>
+</body>
+</html>
