@@ -30,7 +30,12 @@ function start(){
 		bar.moveTo((i%8) * 20, (i/8) * 20);
 	}
 
-	//sjs.scrollable(player,background);
+	var log = new sjs.Image("brick2.png");
+	log.type = "dummy";
+	log.setSize(8,8);
+	log.moveTo(20, 20);
+	
+	sjs.scrollable(log,background);
 
 	sjs.keyDown(Q_KEY, function(){
 		if(CanSel == true){
