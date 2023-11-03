@@ -26,10 +26,11 @@ function start(){
 	
 	
 	for(int i = 0, i < 80, i++){
-	var bar = new sjs.Image("brick.png");
-	bar.type = "deco";
-	bar.setSize(8,8);
-		}
+		var bar = new sjs.Image("brick.png");
+		bar.type = "deco";
+		bar.setSize(8,8);
+		bar.offset(i%8, i/8);
+	}
 
 	//sjs.scrollable(player,background);
 
