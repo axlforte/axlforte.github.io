@@ -1,0 +1,140 @@
+<html>
+<head>
+<script src="https://simplycodingcourses.com/files/simply.js"async></script>
+<script>
+
+function start(){
+	sjs.open("target",500,500);
+	var background = new sjs.Image("Images/Tiles/tileset45.png");
+	background.setSize(500, 500);
+
+	var CanSel = false;
+	var active = 1;
+	var currgrid = 4;
+	var grid = [
+		[0,0,0,0,0,0,0,0,0]
+		[0,0,0,0,0,0,0,0,0]
+		[0,0,0,0,0,0,0,0,0]
+		[0,0,0,0,0,0,0,0,0]
+		[0,0,0,0,0,0,0,0,0]
+		[0,0,0,0,0,0,0,0,0]
+		[0,0,0,0,0,0,0,0,0]
+		[0,0,0,0,0,0,0,0,0]
+		[0,0,0,0,0,0,0,0,0]
+		];
+	
+	
+	
+	for(int i = 0, i < 80, i++){
+	var bar = new sjs.Image("Images/mogasp1.png");
+	bar.type = "deco";
+	bar.setSize(8,8);
+		}
+
+	//sjs.scrollable(player,background);
+
+	sjs.keyDown(Q_KEY, function(){
+		if(CanSel == true){
+			grid[currgrid][0] = active;
+			currgrid = 0;
+		}
+	});
+
+	sjs.keyDown(W_KEY, function(){
+		if(CanSel == true){
+			grid[currgrid][1] = active;
+			currgrid = 1;
+		}
+	});
+
+	sjs.keyDown(E_KEY, function(){
+		if(CanSel == true){
+			grid[currgrid][2] = active;
+			currgrid = 2;
+		}
+	});
+
+	sjs.keyDown(A_KEY, function(){
+		if(CanSel == true){
+			grid[currgrid][3] = active;
+			currgrid = 3;
+		}
+	});
+
+	sjs.keyDown(S_KEY, function(){
+		if(CanSel == true){
+			grid[currgrid][4] = active;
+			currgrid = 4;
+		}
+	});
+
+	sjs.keyDown(D_KEY, function(){
+		if(CanSel == true){
+			grid[currgrid][5] = active;
+			currgrid = 5;
+		}
+	});
+
+	sjs.keyDown(Z_KEY, function(){
+		if(CanSel == true){
+			grid[currgrid][6] = active;
+			currgrid = 6;
+		}
+	});
+
+	sjs.keyDown(X_KEY, function(){
+		if(CanSel == true){
+			grid[currgrid][7] = active;
+			currgrid = 7;
+		}
+	});
+
+	sjs.keyDown(C_KEY, function(){
+		if(CanSel == true){
+			grid[currgrid][8] = active;
+			currgrid = 8;
+		}
+	});
+
+
+	window.addEventListener("keyup", function(e){
+		CanSel = true;
+		if(active == 2){
+			active = 1;
+		} else {
+			active = 2;
+		}
+
+		if((grid[currgrid][0] == grid[currgrid][4] == grid[currgrid][8]) || (grid[currgrid][2] == grid[currgrid][4] == grid[currgrid][6])){
+			currgrid = currgrid + 1;
+			if(currgrid == 9){
+				currgrid = 0;
+			}
+		}
+	}); //end EventListener function
+
+
+	/*setInterval(function(){
+	if(invincible > 0){
+		invincible = invincible - 1
+		health.node.style.backgroundColor = "white"
+	}else{
+		health.node.style.backgroundColor = "yellow"
+	}
+	canShoot = true
+	},250);*/
+
+	//sjs.onHit("player","flag", function(x,y){
+	
+	//});
+} //end start
+
+</script>
+</head>
+<body onload="start()">
+<h1> Platform Game </h1>
+
+
+<div id="target" style="margin:auto;background:#dbc7a2;"></div>
+</body>
+</html>
