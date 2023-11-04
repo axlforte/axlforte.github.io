@@ -151,22 +151,34 @@ function start(){
 	var smallBar = new sjs.Image("brick.png");
 		smallBar.type = "deco";
 		smallBar.setSize(75,4);
-		smallBar.moveTo(50, 25);
+		smallBar.moveTo(50, 45);
 
 	var smallBar2 = new sjs.Image("brick.png");
 		smallBar2.type = "deco";
 		smallBar2.setSize(75,4);
-		smallBar2.moveTo(50, 75);
+		smallBar2.moveTo(50, 65);
 
 	var smallBar3 = new sjs.Image("brick.png");
 		smallBar3.type = "deco";
 		smallBar3.setSize(4,75);
-		smallBar3.moveTo(75, 50);
+		smallBar3.moveTo(65, 50);
 
 	var smallBar4 = new sjs.Image("brick.png");
 		smallBar4.type = "deco";
 		smallBar4.setSize(4,75);
-		smallBar4.moveTo(25, 50);
+		smallBar4.moveTo(45, 50);
+	if(grid[1][1] == 2){
+		var mark1 = new sjs.Image("brick3.png");
+	} else if(rid[1][1] == 1) {
+		var mark1 = new sjs.Image("brick4.png");
+
+	} else {
+		var mark1 = new sjs.Image("brick2.png");
+	}
+
+		mark1.type = "deco";
+		mark1.setSize(4,75);
+		mark1.moveTo(50, 50);
 
 	} // end MakeCross
 
