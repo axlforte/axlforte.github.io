@@ -1,14 +1,3 @@
-- 👋 Hi, I’m @axlforte
-- 👀 I’m interested in the megaman series, specifically the megaman x series
-- 🌱 I’m currently learning javascript
--I’m not looking to collaborate.
-- 📫 i am at <i wont share that yet!>
-
-if you want to see some of my games, here is a link to them!
-
-axlforte.github.io/portfolio.html
-
-<!---
-axlforte/axlforte is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+This contains some code that i made to learn github. 
+This repository also contains the recursive tic tac toe that i am making for my friends.
+if you want to use it yourself then go ahead, its janky enough as is.
