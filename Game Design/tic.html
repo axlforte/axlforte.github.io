@@ -23,26 +23,8 @@ function start(){
 		[3,3,3,3,3,3,3,3,3]
 		];
 
-	var bar = new sjs.Image("brick.png");
-		bar.type = "deco";
-		bar.setSize(8,500);
-		bar.moveTo(150, 250);
-
-	var bar2 = new sjs.Image("brick.png");
-		bar2.type = "deco";
-		bar2.setSize(8,500);
-		bar2.moveTo(350, 250);
-
-	var bar3 = new sjs.Image("brick.png");
-		bar3.type = "deco";
-		bar3.setSize(500, 8);
-		bar3.moveTo(250, 150);
-
-	var bar4 = new sjs.Image("brick.png");
-		bar4.type = "deco";
-		bar4.setSize(500,8);
-		bar4.moveTo(250, 350);
-
+	MakeCross();
+	
 	var log = new sjs.Image("brick2.png");
 	log.type = "dummy";
 	log.setSize(8,8);
@@ -145,6 +127,48 @@ function start(){
 	
 	//});
 } //end start
+
+	function makeCross(){
+		var bar = new sjs.Image("brick.png");
+		bar.type = "deco";
+		bar.setSize(8,500);
+		bar.moveTo(150, 250);
+
+	var bar2 = new sjs.Image("brick.png");
+		bar2.type = "deco";
+		bar2.setSize(8,500);
+		bar2.moveTo(350, 250);
+
+	var bar3 = new sjs.Image("brick.png");
+		bar3.type = "deco";
+		bar3.setSize(500, 8);
+		bar3.moveTo(250, 150);
+
+	var bar4 = new sjs.Image("brick.png");
+		bar4.type = "deco";
+		bar4.setSize(500,8);
+		bar4.moveTo(250,350);
+	var SmallBar = new sjs.Image("brick.png");
+		SmallBar.type = "deco";
+		SmallBar.setSize(75,4);
+		SmallBar.moveTo(50, 25);
+
+	var SmallBar2 = new sjs.Image("brick.png");
+		SmallBar2.type = "deco";
+		SmallBar2.setSize(75,4);
+		SmallBar2.moveTo(50, 75);
+
+	var SmallBar3 = new sjs.Image("brick.png");
+		SmallBar3.type = "deco";
+		SmallBar3.setSize(4,75);
+		SmallBar3.moveTo(75, 50);
+
+	var SmallBar4 = new sjs.Image("brick.png");
+		SmallBar4.type = "deco";
+		SmallBar4.setSize(4,75);
+		SmallBar4.moveTo(25, 50);
+
+	} // end MakeCross
 
 </script>
 </head>
