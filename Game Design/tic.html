@@ -24,8 +24,6 @@ function start(){
 	var background = new sjs.Image("brick2.png");
 	background.setSize(500, 500);
 
-	v
-
 	MakeCross();
 	
 	var log = new sjs.Image("brick2.png");
@@ -114,24 +112,9 @@ function start(){
 			}
 		}
 	}); //end EventListener function
-
-
-	/*setInterval(function(){
-	if(invincible > 0){
-		invincible = invincible - 1
-		health.node.style.backgroundColor = "white"
-	}else{
-		health.node.style.backgroundColor = "yellow"
-	}
-	canShoot = true
-	},250);*/
-
-	//sjs.onHit("player","flag", function(x,y){
-	
-	//});
 } //end start
 
-	function MakeCross(){
+function MakeCross(){
 		var bar = new sjs.Image("brick.png");
 		bar.type = "deco";
 		bar.setSize(8,500);
