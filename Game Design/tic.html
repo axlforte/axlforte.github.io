@@ -3,15 +3,7 @@
 <script src="https://simplycodingcourses.com/files/simply.js"async></script>
 <script>
 
-function start(){
-	sjs.open("target",500,500);
-	var background = new sjs.Image("brick2.png");
-	background.setSize(500, 500);
-
-	var CanSel = false;
-	var active = 1;
-	var currgrid = 4;
-	var grid = [
+var grid = [
 		[3,3,3,3,3,3,3,3,3],
 		[3,3,3,3,3,3,3,3,3],
 		[3,3,3,3,3,3,3,3,3],
@@ -22,6 +14,15 @@ function start(){
 		[3,3,3,3,3,3,3,3,3],
 		[3,3,3,3,3,3,3,3,3]
 		];
+	
+function start(){
+	sjs.open("target",500,500);
+	var background = new sjs.Image("brick2.png");
+	background.setSize(500, 500);
+
+	var CanSel = false;
+	var active = 1;
+	var currgrid = 4;
 
 	MakeCross();
 	
@@ -177,8 +178,8 @@ function start(){
 	}
 
 		mark1.type = "deco";
-		mark1.setSize(4,75);
-		mark1.moveTo(50, 50);
+		mark1.setSize(15,15);
+		mark1.moveTo(60, 60);
 
 	} // end MakeCross
 
