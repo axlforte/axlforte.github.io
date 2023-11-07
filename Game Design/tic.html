@@ -14,15 +14,17 @@ var grid = [
 		[3,3,3,3,3,3,3,3,3],
 		[3,3,3,3,3,3,3,3,3]
 		];
+
+	var CanSel = false;
+	var active = 1;
+	var currgrid = 4;
 	
 function start(){
 	sjs.open("target",500,500);
 	var background = new sjs.Image("brick2.png");
 	background.setSize(500, 500);
 
-	var CanSel = false;
-	var active = 1;
-	var currgrid = 4;
+	v
 
 	MakeCross();
 	
@@ -166,18 +168,14 @@ function start(){
 		smallBar4.type = "deco";
 		smallBar4.setSize(4,75);
 		smallBar4.moveTo(45, 35);
-	if(2 == 2){
-		var mark1 = new sjs.Image("brick3.png");
-	} else if(1 == 1) {
-		var mark1 = new sjs.Image("brick4.png");
+			
+	if(grid[0][4] == 2){var mark1 = new sjs.Image("brick3.png");
+	} else if(grid[0][4] == 1) {var mark1 = new sjs.Image("brick4.png");
+	} else {var mark1 = new sjs.Image("brick2.png");} mark1.type = "deco";mark1.setSize(15,15);mark1.moveTo(60, 60);
 
-	} else {
-		var mark1 = new sjs.Image("brick2.png");
-	}
-
-		mark1.type = "deco";
-		mark1.setSize(15,15);
-		mark1.moveTo(60, 60);
+		if(grid[0][1] == 2){var mark2 = new sjs.Image("brick3.png");
+	} else if(grid[0][1] == 1) {var mark2 = new sjs.Image("brick4.png");
+	} else {var mark2 = new sjs.Image("brick2.png");} mark2.type = "deco";mark2.setSize(15,15);mark2.moveTo(60, 30);
 
 	var sb5 = new sjs.Image("brick.png");sb5.type = "deco";sb5.setSize(75,4);sb5.moveTo(475, 455);
 	var sb6 = new sjs.Image("brick.png");sb6.type = "deco";sb6.setSize(75,4);sb6.moveTo(475, 415);
