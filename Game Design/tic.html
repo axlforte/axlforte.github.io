@@ -151,7 +151,7 @@ function MakeCross(){
 	} else if(grid[0][3] == 1) {var mark7 = new sjs.Image("brick4.png"); mark7.type = "deco";mark7.setSize(15,15);mark7.moveTo(20, 60);
 	} else {var mark7 = new sjs.Image("brick2.png"); mark7.type = "deco";mark7.setSize(15,15);mark7.moveTo(20, 60);}
 
-	if(grid[0][0] == 2){var mark8 = new sjs.Image("brick3.png");mark8.type = "deco";mark8.setSize(15,15);mark8.moveTo(20, 20);
+	if(grid[0][0] == 2){var mark8 = new sjs.Image("brick3.png");mark8.type = "deco";mark8.setSize(5 * grid[0][0],5 * grid[0][0]);mark8.moveTo(20, 20);
 	} else if(grid[0][0] == 1) {var mark8 = new sjs.Image("brick4.png");mark8.type = "deco";mark8.setSize(15,15);mark8.moveTo(20, 20);
 	} else {var mark8 = new sjs.Image("brick2.png");mark8.type = "deco";mark8.setSize(15,15);mark8.moveTo(20, 20);} 
 
